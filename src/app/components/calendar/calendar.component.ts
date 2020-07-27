@@ -40,18 +40,19 @@ export class CalendarComponent implements OnInit, OnDestroy {
               private dataService: DataManagementService) { }
 
   ngOnInit(): void {
+    this.date = new Subject<Date>();
+    this.monthResume = new Day();
+    this.dateSub = this.date.subscribe((date) => {
+      this.startCalendar(date);
+      console.log(date);
+      this.gatherDatafromDb(date);
+      console.log(date);
+      this.dateOnScreen = date;
+      this.calendarDate = date.getFullYear().toString() + '/' + this.calendar[date.getMonth()].month;
+    });
     if (!this.dataService.getUser()) {
       this.router.navigate(['']);
     } else {
-      this.date = new Subject<Date>();
-      this.dateSub = this.date.subscribe((date) => {
-        this.startCalendar(date);
-        console.log(date);
-        this.gatherDatafromDb(date);
-        console.log(date);
-        this.dateOnScreen = date;
-        this.calendarDate = date.getFullYear().toString() + '/' + this.calendar[date.getMonth()].month;
-      });
       const dat = new Date();
       this.date.next(new Date(dat.getFullYear(), dat.getMonth()));
     }
