@@ -3,5 +3,15 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-
+<ul class="nav justify-content-center bg-primary" *ngIf="user">
+  <li class="nav-item">
+    <button class="btn btn-primary" href="#" [routerLink]="[ '/calendar']">Calendario</button>
+  </li>
+  <li class="nav-item">
+    <button class="btn btn-primary" href="#">Registrar Usuario</button>
+  </li>
+  <li class="nav-item">
+    <button class="btn btn-primary" href="#" [routerLink]="[ '/login']" (click)="logout()">Salir</button>
+  </li>
+</ul>
 <router-outlet></router-outlet>
