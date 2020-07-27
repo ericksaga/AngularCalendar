@@ -1,3 +1,11 @@
+<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Basic example">
+    <!-- This button will move down throught months -->
+    <button type="button" class="btn btn-light" (click)="moveDate(-1)">Left</button>
+    <!-- This button will open a modal to select month and year quickly-->
+    <button type="button" class="btn btn-light">{{calendarDate}}</button>
+    <!-- This button will move up throught months -->
+    <button type="button" class="btn btn-light" (click)="moveDate(1)">Right</button>
+</div>
 <table class="table">
     <thead>
         <tr>
