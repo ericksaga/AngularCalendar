@@ -1,10 +1,8 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { User } from 'src/app/classes/user';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Day } from 'src/app/classes/day';
 import { CalendarSquare } from 'src/app/classes/calendar-square';
 import { DatabaseService } from 'src/app/services/database/database.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { DataManagementService } from 'src/app/services/dataManagement/data-management.service';
 import { Subject, Subscription } from 'rxjs';
 
@@ -13,7 +11,7 @@ import { Subject, Subscription } from 'rxjs';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
 
   calendar = [
     {month: 'enero', days: 31},
@@ -59,10 +57,13 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.dateSub.unsubscribe();
+  }
+
   dateInput(day: number) {
     console.log(day);
-    const date: Date = new Date();
-    const dateToEnter: Date = new Date(date.getFullYear(), date.getMonth(), day);
+    const dateToEnter: Date = new Date(this.dateOnScreen.getFullYear(), this.dateOnScreen.getMonth(), day);
     this.dataService.setDate(dateToEnter);
     this.router.navigate(['today']);
   }
