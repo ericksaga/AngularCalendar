@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit {
     st -= stDate.getDay();
     // console.log(st);
     for (let x = 0; x < 42; x++) {
-      let sq = new CalendarSquare();
+      const sq = new CalendarSquare();
       const p = Math.floor(x / 7);
       sq.index = x + st;
       if (x + st <= 0 || x + st > this.endDay) {
@@ -96,15 +96,15 @@ export class CalendarComponent implements OnInit {
 
   gatherDatafromDb(stDate: Date) {
     this.db.getMonthInfo(stDate, this.endDay).subscribe((data: Array<Day>) => {
-      for (let sqArray of this.calendarSq) {
-        for (let sq of sqArray) {
+      for (const sqArray of this.calendarSq) {
+        for (const sq of sqArray) {
           const pos = data.findIndex((day) => day.created.getDate() === sq.index);
           if ( pos !== -1) {
             sq.active = 1;
             this.monthResume.gains += data[pos].gains;
             this.monthResume.type1Clothes += data[pos].type1Clothes;
             this.monthResume.type2Clothes += data[pos].type2Clothes;
-            for (let ct of data[pos].cost) {
+            for (const ct of data[pos].cost) {
               this.monthCosts += ct.value;
             }
           }
