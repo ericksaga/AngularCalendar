@@ -1,18 +1,17 @@
 <!-- Using bootstrap snippet from https://bootsnipp.com/snippets/dldxB -->
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs Titles -->
 
     <!-- Icon -->
     <div class="fadeIn first">
       <img src="../../../favicon.ico" id="icon" alt="User Icon" />
     </div>
-
     <!-- Login Form -->
-    <input [(ngModel)]="email" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-    <input [(ngModel)]="password" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-    <button class="btn btn-primary" (click)="login()">Login</button>
-
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <input type="text" id="login" class="fadeIn second" placeholder="Email" formControlName = "email">
+      <input type="password" id="password" class="fadeIn third" placeholder="Contraseña" formControlName = "password">
+      <button class="btn btn-primary" [disabled]="!loginForm.valid">Acceder</button>
+    </form>
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <a class="underlineHover" href="#">Forgot Password?</a>
