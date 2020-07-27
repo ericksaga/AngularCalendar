@@ -25,9 +25,9 @@ export class DatabaseService {
   }
 
   getMonthInfo(date: Date, end: number) {
-    const monthInit: Date = date;
-    const monthEnd: Date = date;
-    monthInit.setDate(0);
+    const monthInit: Date = new Date(date);
+    const monthEnd: Date = new Date(date);
+    monthInit.setDate(1);
     monthEnd.setDate(end);
     const refInit = this.getDocName(monthInit);
     const refEnd = this.getDocName(monthEnd);
