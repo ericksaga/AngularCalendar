@@ -54,4 +54,8 @@ export class AuthService {
       console.log(err);
     });
   }
+
+  getUser() {
+    return this.fireAuth.user;
+  }
 }

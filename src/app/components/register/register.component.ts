@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     const user: User = new User();
-    user.email = this.registerForm.value.email;
+    user.email = this.registerForm.value.email.toLowerCase();
     user.name = this.registerForm.value.name;
     this.auth.register(user, this.registerForm.value.password).then(() => {
       this.auth.logout();

@@ -31,7 +31,8 @@ export class DayInputComponent implements OnInit {
     this.dayData = this.fb.group({
       gains: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
       type1: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
-      type2: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])]
+      type2: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
+      type3: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])]
     });
     this.costData = this.fb.group({
       desc: ['', Validators.required],
@@ -47,7 +48,8 @@ export class DayInputComponent implements OnInit {
           this.dayData.setValue({
             gains: data.gains,
             type1: data.type1Clothes,
-            type2: data.type2Clothes
+            type2: data.type2Clothes,
+            type3: data.type3Clothes
           });
         } else {
           this.today = new Day();
@@ -61,6 +63,7 @@ export class DayInputComponent implements OnInit {
     this.today.gains = this.dayData.controls.gains.value;
     this.today.type1Clothes = this.dayData.controls.type1.value;
     this.today.type2Clothes = this.dayData.controls.type2.value;
+    this.today.type3Clothes = this.dayData.controls.type3.value;
     this.today.cost = this.costs;
     if (!this.today.created) {
       this.today.created = new Date();
@@ -68,7 +71,9 @@ export class DayInputComponent implements OnInit {
     }
     this.today.lastUpdated = new Date();
     this.today.lastUpdatedBy = this.dataService.getUser().email;
-    this.db.addDayInfo(this.today);
+    this.db.addDayInfo(this.today).then(() => {
+      this.router.navigate(['calendar']);
+    });
   }
 
   addCost() {

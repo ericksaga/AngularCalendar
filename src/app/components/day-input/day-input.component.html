@@ -12,6 +12,10 @@
         <label for="type2">Ropa casa</label>
         <input type="number" class="form-control" id="type2" formControlName="type2">
     </div>
+    <div class="form-group">
+        <label for="type3">Ropa externa</label>
+        <input type="number" class="form-control" id="type3" formControlName="type3">
+    </div>
     <h3>Costos</h3>
     <form [formGroup]= costData (ngSubmit)="addCost()">
         <div class="form-row">

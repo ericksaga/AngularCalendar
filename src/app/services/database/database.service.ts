@@ -13,17 +13,18 @@ export class DatabaseService {
   constructor(private firestr: AngularFirestore) { }
 
   getDocName(date: Date): string {
-    const d = (date.getDate() > 10) ? '' : '0';
-    const m = (date.getMonth() > 10) ? '' : '0';
+    const d = (date.getDate() >= 10) ? '' : '0';
+    const m = (date.getMonth() >= 10) ? '' : '0';
     return `${date.getFullYear()}-${m}${date.getMonth()}-${d}${date.getDate()}`;
   }
   addDayInfo(data: Day) {
     console.log(data);
     const docName = this.getDocName(data.date);
-    this.firestr.collection<Day>(this.dayCollectionName).doc(docName).set({
+    return this.firestr.collection<Day>(this.dayCollectionName).doc(docName).set({
       date: typeof(data.date) === 'string' ? data.date : this.getDocName(data.date),
       type1Clothes: data.type1Clothes,
       type2Clothes: data.type2Clothes,
+      type3Clothes: data.type3Clothes,
       gains: data.gains,
       cost: JSON.parse(JSON.stringify(data.cost)),
       createdBy: data.createdBy,
@@ -50,7 +51,7 @@ export class DatabaseService {
   }
 
   addUser(user: User) {
-    this.firestr.collection<User>(this.userCollectionName).add(user);
+    this.firestr.collection<User>(this.userCollectionName).add(JSON.parse(JSON.stringify(user)));
   }
 
   searchUser(email: string) {

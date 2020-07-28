@@ -7,6 +7,7 @@ export class Day {
     date: Date;
     type1Clothes: number;
     type2Clothes: number;
+    type3Clothes: number;
     gains: number;
     cost: Array<Costs>;
     createdBy: string;
@@ -16,6 +17,7 @@ export class Day {
     constructor() {
         this.type1Clothes = 0;
         this.type2Clothes = 0;
+        this.type3Clothes = 0;
         this.gains = 0;
         this.cost = new Array();
     }
