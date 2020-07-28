@@ -49,7 +49,10 @@ export class DayInputComponent implements OnInit {
             type1: data.type1Clothes,
             type2: data.type2Clothes
           });
+        } else {
+          this.today = new Day();
         }
+        this.today.date = this.date;
       });
     }
   }

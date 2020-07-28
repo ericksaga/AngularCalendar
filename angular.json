@@ -113,8 +113,13 @@
               "devServerTarget": "AngularCalendar:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "AngularCalendar"
 }

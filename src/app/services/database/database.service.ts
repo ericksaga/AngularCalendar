@@ -10,14 +10,27 @@ export class DatabaseService {
 
   dayCollectionName = 'M&M';
   userCollectionName = 'users';
-  getDocName = ((date) => {
-    return `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
-  });
   constructor(private firestr: AngularFirestore) { }
 
+  getDocName(date: Date): string {
+    const d = (date.getDate() > 10) ? '' : '0';
+    const m = (date.getMonth() > 10) ? '' : '0';
+    return `${date.getFullYear()}-${m}${date.getMonth()}-${d}${date.getDate()}`;
+  }
   addDayInfo(data: Day) {
-    const docName = this.getDocName(data.created);
-    this.firestr.collection<Day>(this.dayCollectionName).doc(docName).set(data);
+    console.log(data);
+    const docName = this.getDocName(data.date);
+    this.firestr.collection<Day>(this.dayCollectionName).doc(docName).set({
+      date: typeof(data.date) === 'string' ? data.date : this.getDocName(data.date),
+      type1Clothes: data.type1Clothes,
+      type2Clothes: data.type2Clothes,
+      gains: data.gains,
+      cost: JSON.parse(JSON.stringify(data.cost)),
+      createdBy: data.createdBy,
+      created: typeof(data.created) === 'string' ? data.created : this.getDocName(data.created),
+      lastUpdatedBy: data.lastUpdatedBy,
+      lastUpdated: typeof(data.lastUpdated) === 'string' ? data.lastUpdated : this.getDocName(data.lastUpdated),
+    });
   }
 
   readDayInfo(day: Date) {
@@ -28,10 +41,11 @@ export class DatabaseService {
     const monthInit: Date = new Date(date);
     const monthEnd: Date = new Date(date);
     monthInit.setDate(1);
+    monthInit.setHours(0, 0, 0, 0);
     monthEnd.setDate(end);
-    const refInit = this.getDocName(monthInit);
-    const refEnd = this.getDocName(monthEnd);
-    return this.firestr.collection<Day>(this.dayCollectionName, ref => ref.where('created', '>=', refInit).where('created', '<=', refEnd))
+    monthEnd.setHours(23, 59, 59, 999);
+    return this.firestr.collection<Day>(this.dayCollectionName, ref =>
+      ref.where('date', '>=', this.getDocName(monthInit)).where('date', '<=', this.getDocName(monthEnd)))
     .valueChanges();
   }
 

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "my-project-1552676375852"
+  },
+  "targets": {
+    "my-project-1552676375852": {
+      "hosting": {
+        "AngularCalendar": [
+          "my-project-1552676375852"
+        ]
+      }
+    }
+  }
+}

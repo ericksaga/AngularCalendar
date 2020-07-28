@@ -98,17 +98,25 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   gatherDatafromDb(stDate: Date) {
     this.db.getMonthInfo(stDate, this.endDay).subscribe((data: Array<Day>) => {
+      console.log(data);
       for (const sqArray of this.calendarSq) {
         for (const sq of sqArray) {
-          const pos = data.findIndex((day) => day.created.getDate() === sq.index);
+          const pos = data.findIndex((day) => {
+            if (typeof(day.date) === 'string') {
+              return this.parseStringDate(day.date).getDate() === sq.index;
+            } else {
+              return day.date.getDate() === sq.index;
+            }
+          });
           if ( pos !== -1) {
             sq.active = 1;
-            this.monthResume.gains += data[pos].gains;
-            this.monthResume.type1Clothes += data[pos].type1Clothes;
-            this.monthResume.type2Clothes += data[pos].type2Clothes;
+            this.monthResume.gains += +data[pos].gains;
+            this.monthResume.type1Clothes += +data[pos].type1Clothes;
+            this.monthResume.type2Clothes += +data[pos].type2Clothes;
             for (const ct of data[pos].cost) {
-              this.monthCosts += ct.value;
+              this.monthCosts += +ct.value;
             }
+            console.log(sq);
           }
         }
       }
@@ -130,6 +138,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
     }
     console.log(month);
     this.date.next(new Date(year, month));
+  }
+
+  parseStringDate(sDate: string): Date {
+    const d = sDate.split('-');
+    return new Date(+d[0], +d[1], +d[2]);
   }
 
 }
