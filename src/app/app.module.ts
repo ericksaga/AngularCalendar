@@ -15,6 +15,7 @@ import { DatabaseService } from './services/database/database.service';
 import { AuthService } from './services/auth/auth.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayInputComponent } from './components/day-input/day-input.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DayInputComponent } from './components/day-input/day-input.component';
     LoginComponent,
     CalendarComponent,
     DayInputComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
