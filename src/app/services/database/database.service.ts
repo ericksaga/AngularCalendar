@@ -25,6 +25,7 @@ export class DatabaseService {
       type1Clothes: data.type1Clothes,
       type2Clothes: data.type2Clothes,
       type3Clothes: data.type3Clothes,
+      type4Clothes: data.type4Clothes,
       gains: data.gains,
       cost: JSON.parse(JSON.stringify(data.cost)),
       createdBy: data.createdBy,

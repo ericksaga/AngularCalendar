@@ -8,6 +8,7 @@ export class Day {
     type1Clothes: number;
     type2Clothes: number;
     type3Clothes: number;
+    type4Clothes: number;
     gains: number;
     cost: Array<Costs>;
     createdBy: string;
@@ -18,6 +19,7 @@ export class Day {
         this.type1Clothes = 0;
         this.type2Clothes = 0;
         this.type3Clothes = 0;
+        this.type4Clothes = 0;
         this.gains = 0;
         this.cost = new Array();
     }
