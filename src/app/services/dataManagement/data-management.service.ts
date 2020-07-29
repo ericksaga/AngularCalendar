@@ -9,8 +9,10 @@ export class DataManagementService {
   private user: User;
   private date: Date;
   private userObserver: Subject<User>;
+  private dateObserver: Subject<Date>;
   constructor() {
     this.userObserver = new Subject<User>();
+    this.dateObserver = new Subject<Date>();
    }
 
   getDate(): Date {
@@ -19,6 +21,7 @@ export class DataManagementService {
 
   setDate(newDate: Date) {
     this.date = newDate;
+    this.dateObserver.next(newDate);
   }
 
   getUser(): User {
@@ -32,5 +35,9 @@ export class DataManagementService {
 
   getUserObservable(): Observable<User> {
     return this.userObserver;
+  }
+
+  getDateObservable(): Observable<Date> {
+    return this.dateObserver;
   }
 }

@@ -16,6 +16,7 @@ import { AuthService } from './services/auth/auth.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayInputComponent } from './components/day-input/day-input.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CalendarModalComponent } from './components/calendar-modal/calendar-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RegisterComponent } from './components/register/register.component';
     CalendarComponent,
     DayInputComponent,
     RegisterComponent,
+    CalendarModalComponent,
   ],
   imports: [
     BrowserModule,

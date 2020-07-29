@@ -31,7 +31,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   dateOnScreen: Date;
   endDay: number;
   monthResume: Day;
-  date: Subject<Date>;
   dateSub: Subscription;
   monthCosts = 0;
   calendarDate: string;
@@ -40,9 +39,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
               private dataService: DataManagementService) { }
 
   ngOnInit(): void {
-    this.date = new Subject<Date>();
     this.monthResume = new Day();
-    this.dateSub = this.date.subscribe((date) => {
+    this.dateSub = this.dataService.getDateObservable().subscribe((date) => {
       this.startCalendar(date);
       console.log(date);
       this.gatherDatafromDb(date);
@@ -53,8 +51,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (!this.dataService.getUser()) {
       this.router.navigate(['']);
     } else {
-      const dat = new Date();
-      this.date.next(new Date(dat.getFullYear(), dat.getMonth()));
+      let dat = this.dataService.getDate();
+      dat = dat ? dat : new Date();
+      this.dataService.setDate(new Date(dat.getFullYear(), dat.getMonth()));
     }
   }
 
@@ -139,7 +138,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       year--;
     }
     console.log(month);
-    this.date.next(new Date(year, month));
+    this.dataService.setDate(new Date(year, month));
   }
 
   parseStringDate(sDate: string): Date {
