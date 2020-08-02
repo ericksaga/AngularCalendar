@@ -6,7 +6,7 @@
         </svg>
     </button>
     <!-- This button will open a modal to select month and year quickly-->
-    <button type="button" class="btn btn-light">{{calendarDate}}</button>
+    <button type="button" class="btn btn-light" (click)="openSelector = !openSelector">{{calendarDate}}</button>
     <!-- This button will move up throught months -->
     <button type="button" class="btn btn-light" (click)="moveDate(1)">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -14,6 +14,7 @@
         </svg>
     </button>
 </div>
+<app-year-selector *ngIf="openSelector"></app-year-selector>
 <table class="table">
     <thead>
         <tr>

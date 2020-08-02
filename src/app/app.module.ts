@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,7 +17,7 @@ import { AuthService } from './services/auth/auth.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayInputComponent } from './components/day-input/day-input.component';
 import { RegisterComponent } from './components/register/register.component';
-import { CalendarModalComponent } from './components/calendar-modal/calendar-modal.component';
+import { YearSelectorComponent } from './components/year-selector/year-selector.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +26,11 @@ import { CalendarModalComponent } from './components/calendar-modal/calendar-mod
     CalendarComponent,
     DayInputComponent,
     RegisterComponent,
-    CalendarModalComponent,
+    YearSelectorComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

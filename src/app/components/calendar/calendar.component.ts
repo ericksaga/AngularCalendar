@@ -34,6 +34,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   dateSub: Subscription;
   monthCosts = 0;
   calendarDate: string;
+  openSelector = false;
   constructor(private db: DatabaseService,
               private router: Router,
               private dataService: DataManagementService) { }
@@ -41,10 +42,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.monthResume = new Day();
     this.dateSub = this.dataService.getDateObservable().subscribe((date) => {
+      this.monthCosts = 0;
+      this.openSelector = false;
       this.startCalendar(date);
-      console.log(date);
       this.gatherDatafromDb(date);
-      console.log(date);
       this.dateOnScreen = date;
       this.calendarDate = date.getFullYear().toString() + '/' + this.calendar[date.getMonth()].month;
     });
@@ -92,7 +93,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
       this.calendarSq[p].push(sq);
     }
-    console.log(this.calendar[stDate.getMonth()].month);
   }
 
   gatherDatafromDb(stDate: Date) {
@@ -107,7 +107,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
               return day.date.getDate() === sq.index;
             }
           });
-          if ( pos !== -1) {
+          if (pos !== -1) {
             sq.active = 1;
             this.monthResume.gains += +data[pos].gains;
             this.monthResume.type1Clothes += +data[pos].type1Clothes;
@@ -117,7 +117,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
             for (const ct of data[pos].cost) {
               this.monthCosts += +ct.value;
             }
-            console.log(sq);
           }
         }
       }

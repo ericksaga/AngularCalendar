@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarModalComponent } from './calendar-modal.component';
+import { YearSelectorComponent } from './year-selector.component';
 
-describe('CalendarModalComponent', () => {
-  let component: CalendarModalComponent;
-  let fixture: ComponentFixture<CalendarModalComponent>;
+describe('YearSelectorComponent', () => {
+  let component: YearSelectorComponent;
+  let fixture: ComponentFixture<YearSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarModalComponent ]
+      declarations: [ YearSelectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalendarModalComponent);
+    fixture = TestBed.createComponent(YearSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
