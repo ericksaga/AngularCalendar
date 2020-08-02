@@ -33,7 +33,8 @@ export class DayInputComponent implements OnInit {
       type1: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
       type2: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
       type3: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
-      type4: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])]
+      type4: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])],
+      bank: ['0', Validators.compose([Validators.required, Validators.pattern(reg)])]
     });
     this.costData = this.fb.group({
       desc: ['', Validators.required],
@@ -51,7 +52,8 @@ export class DayInputComponent implements OnInit {
             type1: data.type1Clothes,
             type2: data.type2Clothes,
             type3: data.type3Clothes,
-            type4: data.type4Clothes
+            type4: data.type4Clothes,
+            bank: (data.sendToBank) ? data.sendToBank : 0
           });
         } else {
           this.today = new Day();
@@ -67,6 +69,7 @@ export class DayInputComponent implements OnInit {
     this.today.type2Clothes = this.dayData.controls.type2.value;
     this.today.type3Clothes = this.dayData.controls.type3.value;
     this.today.type4Clothes = this.dayData.controls.type4.value;
+    this.today.sendToBank = this.dayData.controls.bank.value;
     this.today.cost = this.costs;
     if (!this.today.created) {
       this.today.created = new Date();

@@ -114,6 +114,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
             this.monthResume.type2Clothes += +data[pos].type2Clothes;
             this.monthResume.type3Clothes += +data[pos].type3Clothes;
             this.monthResume.type4Clothes += +data[pos].type4Clothes;
+            this.monthResume.sendToBank += (data[pos].sendToBank) ? +(data[pos].sendToBank) : 0;
             for (const ct of data[pos].cost) {
               this.monthCosts += +ct.value;
             }

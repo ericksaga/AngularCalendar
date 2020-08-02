@@ -22,11 +22,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.getUser().subscribe((user) => {
-      this.db.searchUser(user.email).subscribe((userObj: Array<User>) => {
-        this.dataService.setUser(userObj[0]);
-        this.router.navigate(['calendar']);
-        console.log('user Logged in');
-      });
+      if (user) {
+        this.db.searchUser(user.email).subscribe((userObj: Array<User>) => {
+          this.dataService.setUser(userObj[0]);
+          this.router.navigate(['calendar']);
+          console.log('user Logged in');
+        });
+      }
     });
     if (this.dataService.getUser()) {
       this.router.navigate(['calendar']);
